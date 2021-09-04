@@ -2,12 +2,13 @@
 const ORDER_ASC_BY_COST = "High";
 const ORDER_DESC_BY_COST = "Low";
 const ORDER_BY_SOLD_COUNT = "Cant.";
-var currentCategoriesArray = [];
+var currentProductsArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
 var maxCount = undefined;
+let textBox = document.getElementById('buscador');
 
-function sortCategories(criteria, array){
+function sortProducts(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_COST)
     {
@@ -36,29 +37,30 @@ function sortCategories(criteria, array){
     return result;
 }
 
-function showCategoriesList(){
+
+function showProductsList(){
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentCategoriesArray.length; i++){
-        let category = currentCategoriesArray[i];
+    for(let i = 0; i < currentProductsArray.length; i++){
+        let product = currentProductsArray[i];
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(category.soldCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.soldCount) <= maxCount))){
+        if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
             htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
-                        <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
+                        <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ category.name +`</h4>
+                            <h4 class="mb-1">`+ product.name +`</h4>
                             
                         </div>
-                        <p class="mb-1">` + category.description + `</p>
-                        <p class="text-muted">` + "Precio: " + category.cost +" " + category.currency + `</p>
-                        <small class="text-muted">` + "Unidades vendidas: " + category.soldCount + `</small>
+                        <p class="mb-1">` + product.description + `</p>
+                        <p class="text-muted">` + "Precio: " + product.cost +" " + product.currency + `</p>
+                        <small class="text-muted">` + "Unidades vendidas: " + product.soldCount + `</small>
                     </div>
                 </div>
             </a>
@@ -69,17 +71,17 @@ function showCategoriesList(){
     }
 }
 
-function sortAndShowCategories(sortCriteria, categoriesArray){
+function sortAndShowProducts(sortCriteria, productsArray){
     currentSortCriteria = sortCriteria;
 
-    if(categoriesArray != undefined){
-        currentCategoriesArray = categoriesArray;
+    if(productsArray != undefined){
+        currentProductsArray = productsArray;
     }
 
-    currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
+    currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
 
     //Muestro las categorías ordenadas
-    showCategoriesList();
+    showProductsList();
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -88,20 +90,20 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
-            sortAndShowCategories(ORDER_ASC_BY_COST, resultObj.data);
+            sortAndShowProducts(ORDER_ASC_BY_COST, resultObj.data);
         }
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_COST);
+        sortAndShowProducts(ORDER_ASC_BY_COST);
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_COST);
+        sortAndShowProducts(ORDER_DESC_BY_COST);
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_SOLD_COUNT);
+        sortAndShowProducts(ORDER_BY_SOLD_COUNT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
@@ -111,8 +113,18 @@ document.addEventListener("DOMContentLoaded", function(e){
         minCount = undefined;
         maxCount = undefined;
 
-        showCategoriesList();
+        showProductsList();
     });
+
+    //Obtenemos el texto que se está buscando
+    textBox.addEventListener('keydown', (event) => {
+        
+        let texto = textBox.value;
+        console.log(texto);
+
+        
+
+      });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
@@ -134,8 +146,9 @@ document.addEventListener("DOMContentLoaded", function(e){
             maxCount = undefined;
         }
 
-        showCategoriesList();
+        showProductsList();
     });
+    
 });
 
 
@@ -146,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 
 
-//Función prevía utilizada par obtener la lista de productos
+//Función prevía utilizada en entrega 1 para obtener la lista de productos
 
 //1. Obtener la información. Para eso usamos la función FETCH o la función GETJSONDATA definida en init.js. 
 //2. Hacer procedimiento para insertar en HTML el primer producto. 
@@ -176,17 +189,8 @@ contenedor.innerHTML= contenido;
      
 
 })
-.catch(err=>console.log(err));
+.catch(err=>console.log(err));*/
 
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function (e){
-   
-});*/
 
 
 
