@@ -47,8 +47,8 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-  const nombre = sessionStorage.getItem('user')
-  let inicio = window.location.pathname
+  const nombre = sessionStorage.getItem('user');
+  let inicio = window.location.href;
   
 
   if (nombre === null && inicio !== "https://luciano1991.github.io/e_commerce_jap/index.html" ){
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function(e){
   }
  {
     const userNav= document.getElementById('userNav');
-    userNav.innerHTML = nombre
+    userNav.innerHTML = nombre;
   }
 
 
