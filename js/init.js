@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", function(e){
  /* if (nombre === null && inicio !== "/index.html" ){
     window.location.replace("index.html");
 
-  }*/
+ 
  {
     const userNav= document.getElementById('userNav');
     userNav.innerHTML = nombre
-  }
+  } }*/
 
 
     
