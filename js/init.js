@@ -49,9 +49,9 @@ var getJSONData = function(url){
 document.addEventListener("DOMContentLoaded", function(e){
   const nombre = sessionStorage.getItem('user')
   let inicio = window.location.pathname
-  let inicioDos = window.location.href
+  
 
-  if (nombre === null && inicio !== "/index.html" && inicioDos !== "https://luciano1991.github.io/e_commerce_jap/index.html"  ){
+  if (nombre === null && inicio !== "https://luciano1991.github.io/e_commerce_jap/index.html" ){
     window.location.replace("index.html");
 
   }
