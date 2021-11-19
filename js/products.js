@@ -48,22 +48,20 @@ function showProductsList(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
             htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ product.name +`</h4>
-                            
-                        </div>
-                        <p class="mb-1">` + product.description + `</p>
-                        <p class="text-muted">` + "Precio: " + product.cost +" " + product.currency + `</p>
-                        <small class="text-muted">` + "Unidades vendidas: " + product.soldCount + `</small>
-                    </div>
-                </div>
-            </a>
+        
+            <div class="col-md-4">
+                
+                    <a href="product-info.html" class="card mb-4 shadow-sm custom-card">  
+                        <img class="bd-placeholder-img card-img-top" src="` + product.imgSrc + `" alt="` + product.description + `>
+                        <h3 class="m-3">`+ product.name +`</h3>
+                        <div class="card-body">
+                            <p class="card-text">` + product.description + `</p>
+                            <p class="card-text">` + "Precio: " + product.cost +" " + product.currency + `</p>
+                            <small class="card-text">` + "Unidades vendidas: " + product.soldCount + `</small>
+                        </div>   
+                    </a>     
+            </div>       
+               
             `
         }
 
@@ -150,46 +148,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
     
 });
-
-
-
-
-
-
-
-
-
-//Función prevía utilizada en entrega 1 para obtener la lista de productos
-
-//1. Obtener la información. Para eso usamos la función FETCH o la función GETJSONDATA definida en init.js. 
-//2. Hacer procedimiento para insertar en HTML el primer producto. 
-//3. Hacer prodecimiento para insertar todos los productos en el HTML.
-
-/*fetch(PRODUCTS_URL)
-.then(Response => Response.json() )
-.then(data => {
-let contenedor=document.getElementById('contenedor')
-let contenido="";
-for (let p = 0; p < data.length; p++) {
-    contenido+=
-    `
-        <h1  class="d-flex w-100 justify-content-between">${data[p].name}</h1>
-        <p><img src=${data[p].imgSrc} +  alt="" + " class="img-thumbnail"></p>
-        <h4 class="description">${data[p].description}</h4>
-        <br>
-        <h5 class="mb-1 text-muted ">${'Valor: ' + " " + data[p].cost} ${data[p].currency} </h5>
-        
-        <h5 class="mb-1 text-muted ">${'Unidades vendidas: ' + data[p].soldCount}</h5>
-        <br><br>
-
-
-    `
-}    
-contenedor.innerHTML= contenido;
-     
-
-})
-.catch(err=>console.log(err));*/
 
 
 

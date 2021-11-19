@@ -13,28 +13,117 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-</head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+</head>
+<div id="nav"></div>
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" id="userNav" href=""></a> 
-      <a class="py-2 d-none d-md-inline-block" id="close" href="#" active  onclick="logout()">Cerrar sesión</a>
+  
+
+  <main role="main">
+    <div class="container mt-5">
+      <div class="text-center p-4">
+        <h2>Descripción de los productos</h2>
+        <p class="lead">Encontrarás aquí toda la información del producto seleccionado.</p>
+        <p class="small alert-warning py-3"><strong>Nota: </strong>por simplicidad, cualquiera sea el producto
+          seleccionado previamente, siempre se visualizará la presente: <strong>Chevrolet Onix</strong>.</p>
+      </div>
+
+      <h1  id="productName"></h1>
+
+      <hr class="my-3">
+
+      <div class= "w-50" style="float: right;">
+
+        <div class="list-group-item list-group-item-action flex-column align-items-start" >
+          <dt >Descripción</dt>
+          <dd>
+            <p id="productDescription" style="font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif; "></p>
+          </dd>
+        </div>
+        
+
+      </div>
+     
+
+     <div class="bd-example w-50 ">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators" id="indicators">
+            <!-- aquí van los indicadores-->
+          </ol>
+           
+          <div class="carousel-inner" role="listbox" id="productsImages" >
+            <!-- aquí van las imagénes-->
+          </div>
+          
+          <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      
+      
+      
+      <div class="list-group-item list-group-item-action flex-column align-items-start w-50" >
+        <dt>Cantidad de productos vendidos
+          <dd><p id="productCount"></p></dd>
+        </dt>
+      </div>
+      <div class="list-group-item list-group-item-action flex-column align-items-start w-50" >
+        <dt>Categoría</dt>
+        <dd><p id="productCriteria"></p>
+        </dd>
+      </div>
+ 
+      
+
+      <hr class="my-3">
+
+      <h3>Productos relacionados</h3>
+        <dd>
+          <div class="row text-center text-lg-left pt-2" id="relatedProducts">
+          </div>
+        </dd>
+
+      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+      
+      <hr class="my-3">
+
+      <h3>Comentarios</h3>
+      <div id="newComments" class="card  w-50" >
+        <div class="card-header font-weight-bold" id="refUser" >
+        </div>
+        <div class="card-body">
+          <form id="formulario" action="#" method="get">
+            <input id="newDescription" class="form-control" type="text"  placeholder="comentario">
+            <br>
+            <div>
+              <label class="description">Puntuación:</label>
+              <input type="number" id="newScore" name="newSocre" min="1" max="5" step="1"/>
+
+              
+            </div>
+          </form>
+        </div>
+        <button id="button" type="button" class="btn btn-primary btn-lg btn-block" onclick="saveComment()" >Enviar</button>  
+      </div>
+      <div id="showNewComments">
+      </div>
+
+      <dd>
+        <br><br>
+        <div id="oldComments"></div>
+      </dd>
+    
+      <hr class="my-3">
+      
     </div>
-  </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
-  </div>
+  </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
@@ -46,11 +135,8 @@
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+
+      
   </div>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>

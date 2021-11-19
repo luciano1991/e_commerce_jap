@@ -34,25 +34,185 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" id="userNav" href=""></a>
-      <a class="py-2 d-none d-md-inline-block" id="close" href="#" active  onclick="logout()">Cerrar sesión</a>
+  <div id="nav"></div>
+  <main role="main">
+    <div id="alert"></div>
+    <div class="container mt-5">
+      <div class="text-center p-4">
+        <h1>Carrito de compras</h1>
+        <br>
+      </div>
+
+      <h2>Artículos a comprar</h2>
+      <br>
+      
+      
+      <button type="button" class="btn btn-dark float-right " onclick="removeProduct()">Eliminar</button>
+        <table  class="table table-responsive  ">
+          <th class="w-50 " >Nombre</th>
+          <th class="w-25  ">Costo</th>
+          <th class="w-25" >Cantidad</th>
+          <th class="w-25">Subtotal</th>
+        </table>
+      
+        <div class="container" > </div>
+       
+      <div class="row" id="showPurchase"></div>
+
+      <hr class="my-3">
+      <br>
+
+      <h5 class="mb-3">Tipo de envío</h5>
+      <div id="tipoDeEnvio"  class="d-block my-3">
+        <div class="custom-control custom-radio clase">
+          <input  id="goldradio" name="tipoDeEnvio" type="radio" class="custom-control-input" required="" data-valor="15" onclick="costoDeEnvio('goldradio')">
+          <label class="custom-control-label" for="goldradio">Premium 2 a 5 días (15%)</label>
+        </div>
+        <div class="custom-control custom-radio clase">
+          <input id="expressRadio" name="tipoDeEnvio" type="radio" class="custom-control-input" required="" data-valor="7" onclick="costoDeEnvio('expressRadio')">
+          <label class="custom-control-label" for="expressRadio">Express 5 a 8 días(7%)</label>
+        </div>
+        <div class="custom-control custom-radio clase">
+          <input id="standardradio" name="tipoDeEnvio" type="radio" class="custom-control-input" required="" data-valor="5" onclick="costoDeEnvio('standardradio')">
+          <label class="custom-control-label" for="standardradio">Estándar 12 a 15 días (5%)</label>
+          <p hidden id= 'alertaMetodo' style="color: red;"> Selecciona un método de pago </p>
+        </div>
+        <div class="row">
+          <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Ver condiciones</button>
+        </div>
+      </div>
+
+
+      <br>
+      <h3>Dirección de envío</h3>
+      
+      <form class="form-signin" id="form" action= ""  onsubmit="">
+      
+
+        <label for="user" class=""></label>
+        <input type="text" id ="calle" class="form-control w-50" placeholder="Calle" >
+        <p hidden id= 'alertaCalle' style="color: red;"> Ingresa una calle </p>
+
+        <label for="user" class=""></label>
+        <input type="text/number" id ="numero" class="form-control w-50" placeholder="Número" >
+        <p hidden id= 'alertaNumero' style="color: red;"> Ingresa un número de puerta </p>
+        
+        <label for="user" class=""></label>
+        <input type="text" id ="esquina" class="form-control w-50" placeholder="Esquina" >
+        <p hidden id= 'alertaEsquina' style="color: red;"> Ingresa una esquina </p>
+      </form>
+      
+      
+      
+      <hr class="my-3">
+      <br>
+
+      <div class="col"></div>
+      <h2>Costos</h2>
+      <br>
+      <div class="list-group-item list-group-item-action flex-column  w-25" >
+        <dt>Subtotal :
+          <dd>
+            <p style="text-align: right;" id="subTotal"></p>
+          </dd>
+        </dt>
+      </div>
+      <div class="list-group-item list-group-item-action flex-column  w-25" >
+        <dt>Costo de envío :
+          <dd><p style="text-align: right;"  id="costoDeEnvio" ></p></dd>
+        </dt>
+      </div>
+      <div class="list-group-item list-group-item-action flex-column  w-25" >
+        <dt>Total :
+          <dd><p  style="text-align: right;" id="total"></p></dd>
+        </dt>
+      </div>
+
+      <hr class="my-3">
+      <br>
+
+
+      <h2>Forma de pago</h2>
+      <br>
+
+
+      <div>
+        <p><span id="select">No ha seleccionado.</span>
+            
+          
+          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+            Seleccionar
+          </button>
+          <p hidden id= 'alertaSelect' style="color: red;">Selecciona un método de pago </p> 
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group"> 
+                          <div class="custom-control custom-radio">
+                            <input id="creditCard" name="publicationType" type="radio" class="custom-control-input" required="">
+                            <label class="custom-control-label" for="creditCard">Tarjeta de crédito</label>
+                            <div class="custom-control ">
+                              <label for="Número de tarjeta" >Número de tarjeta</label>
+                              <input type="tex/number" class="form-control" id="cardNumber" disabled>
+                              <p hidden id= 'alertaNumberCard' style="color: red;">Ingrese número de tarjeta </p>  
+                            </div>
+                            <div class="custom-control ">
+                              <label for="Número de tarjeta" >Código de seg.</label>
+                              <input type="number" class="form-control" max="999" min="0" id="securityCode" disabled> 
+                              <p hidden id= 'alertaSecurity' style="color: red;">Ingrese código de seguridad </p>
+                            </div>
+                            <div class="custom-control ">
+                              <label for="Número de tarjeta" >Vencimiento (MM/AA)</label>
+                              <input type="month"   class="form-control" id="expiration" disabled> 
+                              <p hidden id= 'alertaExpiration' style="color: red;">Ingrese vencimiento </p>
+                            </div>
+                             
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">  
+                          <div class="custom-control custom-radio">
+                            <input id="bankAccount" name="publicationType" type="radio" class="custom-control-input" required="">
+                            <label class="custom-control-label" for="bankAccount">Cuenta bancaria</label>
+                            <div class="custom-control ">
+                              <label for="Número de cuenta" >Número de cuenta</label>
+                              <input type="tex/number" class="form-control" id="accountNumber" disabled> 
+                              <p hidden id='alertaAccount' style="color: red;">Ingrese cuenta bancaria </p>
+                            </div>
+                          </div>
+                        </div>  
+                      </div>
+                    </div>
+                  </div>       
+                </div>
+                <div class="modal-footer">
+                  
+                  <button type="button" class="btn btn-primary"  data-dismiss="modal">Guardar cambios</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block w-25" type="submit"  onclick="validar()">Finalizar compra</button>
+
     </div>
-  </nav>
+  </main>
+ 
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
-  </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

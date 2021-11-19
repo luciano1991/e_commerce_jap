@@ -1,5 +1,6 @@
 var category = {};
 
+// Funcion para obtener las imagenes
 function showImagesGallery(array){
 
     let htmlContentToAppend = "";
@@ -19,15 +20,12 @@ function showImagesGallery(array){
     }
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
+// Obtengo los datos del JSON
     getJSONData(CATEGORY_INFO_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            category = resultObj.data;
-
+            let category = resultObj.data;
+            //Inserto los datos en el HTML
             let categoryNameHTML  = document.getElementById("categoryName");
             let categoryDescriptionHTML = document.getElementById("categoryDescription");
             let productCountHTML = document.getElementById("productCount");
@@ -42,4 +40,5 @@ document.addEventListener("DOMContentLoaded", function(e){
             showImagesGallery(category.images);
         }
     });
-});
+
+   
